@@ -18,7 +18,7 @@ const Header = () => {
 					/>
 				</h1>
 				{/* tailwind: 반응형 (mobile first) */}
-				<ul className='space-x-4 hidden md:flex'>
+				<ul className='hidden space-x-4 md:flex'>
 					<li className='headerLink'>HOME</li>
 					<li className='headerLink'>TV Show</li>
 					<li className='headerLink'>Movies</li>

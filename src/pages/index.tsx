@@ -4,6 +4,8 @@ import Header from '@/components/Header';
 import requests from '@/utils/request';
 import { Movie } from '../../types';
 import Banner from '@/components/Banner';
+// npm i tailwind-scrollbar tailwind-scrollbar-hide
+// 확장기능 headwind: tailwind구문에서 최적화된 순서에 맞게 구문 자동재배치 (ctrl+alt+T)
 
 interface Props {
 	original: Movie[];

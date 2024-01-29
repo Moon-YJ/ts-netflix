@@ -22,6 +22,10 @@ const config: Config = {
 				r1: '1rem',
 				r2: '2rem',
 			},
+			backgroundImage: {
+				gradient1:
+					'linear-gradient(to bottom, rgba(20,20,20,0), rgba(20,20,20,1))',
+			},
 		},
 	},
 	plugins: [],

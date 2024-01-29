@@ -9,8 +9,8 @@ interface Props {
 	original: Movie[];
 }
 
-// Banner컴포넌트로 페이지 타입 지정
-const Banner: NextPage<Props> = ({ original }: Props) => {
+// index.tsx 제외한 compoents안쪽의 파일들은 page 컴포넌트가 아니기 때문에 NextPage type제거
+const Banner = ({ original }: Props) => {
 	// useState는 초기값을 집어넣지 않더라도 추후 담기는 값을 인지해서 타입 추론
 	// useState는 예외사항에 대한 값을 무조건 유니온타입으로 지정해야함
 	const [Movie, setMovie] = useState<Movie | null>(null);
@@ -26,11 +26,11 @@ const Banner: NextPage<Props> = ({ original }: Props) => {
 	}, [original]);
 
 	return (
-		<section className='flex flex-col h-screen px-4 pt-40 pb-20 space-y-4 md:space-y-10 lg:space-y-14'>
+		<section className='relative flex flex-col h-[60vh] justify-end px-4 pt-40 pb-5 space-y-4 md:h-[70vh] md:pd-15 md:space-y-8 lg:space-y-14 lg:h-[85vh] lg:pb-20'>
 			{Movie && (
 				<>
 					{/* pic Frame */}
-					<div className='absolute top-0 left-0 z-[1] w-full h-full'>
+					<div className='absolute top-0 left-0 z-[1] w-full h-full opacity-70'>
 						<Image
 							src={`${baseURL}original${Movie.backdrop_path}`}
 							// alt값은 기본적으로 문자만 전달받도록 타입이 강제되어 있으므로

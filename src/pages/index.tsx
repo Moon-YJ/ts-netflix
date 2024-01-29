@@ -4,6 +4,7 @@ import Header from '@/components/Header';
 import requests from '@/utils/request';
 import { Movie } from '../../types';
 import Banner from '@/components/Banner';
+import List from '@/components/List';
 // npm i tailwind-scrollbar tailwind-scrollbar-hide
 // 확장기능 headwind: tailwind구문에서 최적화된 순서에 맞게 구문 자동재배치 (ctrl+alt+T)
 
@@ -23,7 +24,7 @@ interface Props {
 const Home: NextPage<Props> = (props: Props) => {
 	return (
 		// w-screen: 100vw, h-screen: 100vh, w-full: 100%, h-full: 100%
-		<div className='relative h-screen'>
+		<div className='relative w-full h-screen overflow-x-hidden scrollbar-thin scrollbar-thumb-[red] scrollbar-track-[transparent]'>
 			<Head>
 				<title>NETFLIX</title>
 				<link rel='icon' href='/favicon.ico' />
@@ -32,12 +33,17 @@ const Home: NextPage<Props> = (props: Props) => {
 			<Header />
 			<main className='relative'>
 				<Banner original={props.original} />
+				{/* <List movies={props.sf} title={'Science Fiction'} />
+				<List movies={props.drama} title={'Drama'} /> */}
+				{Object.values(props).map((category, idx) => (
+					<List key={idx} movies={category} title={Object.keys(props)[idx]} />
+				))}
 			</main>
 		</div>
 	);
 };
 
-export const getServerSideProps = async () => {
+export const getStaticProps = async () => {
 	//Promie.all([promise, promise]).then(()=> 배열에 인수로 전달된 모든 promise객체의 상태가 fullfiled, rejected가 되어야지만 이곳 then구문이 동기적으로 실행됨)
 	const [original, top, sf, drama, fantasy, comedy, action] = await Promise.all(
 		[
@@ -60,6 +66,7 @@ export const getServerSideProps = async () => {
 			comedy: comedy.results,
 			action: action.results,
 		},
+		revalidate: 60 * 60 * 60 * 24,
 	};
 };
 

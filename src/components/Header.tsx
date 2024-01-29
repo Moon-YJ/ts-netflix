@@ -17,7 +17,7 @@ const Header = () => {
 						className='cursor-pointer'
 					/>
 				</h1>
-
+				{/* tailwind: 반응형 (mobile first) */}
 				<ul className='space-x-4 hidden md:flex'>
 					<li className='headerLink'>HOME</li>
 					<li className='headerLink'>TV Show</li>
@@ -26,7 +26,6 @@ const Header = () => {
 					<li className='headerLink'>My List</li>
 				</ul>
 			</div>
-
 			<div className='flex items-center space-x-4 text-sm font-light'>
 				<FaSearch className='w-6' />
 				<p className='hidden lg:inline'>Kids</p>

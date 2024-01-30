@@ -5,6 +5,7 @@ import requests from '@/utils/request';
 import { Movie } from '../../types';
 import Banner from '@/components/Banner';
 import List from '@/components/List';
+import getData from '@/hooks/useAuth';
 // npm i tailwind-scrollbar tailwind-scrollbar-hide
 // 확장기능 headwind: tailwind구문에서 최적화된 순서에 맞게 구문 자동재배치 (ctrl+alt+T)
 
@@ -21,6 +22,7 @@ interface Props {
 // Page 컴포넌트에 대한 타입은 Next에서 이미 제공하고 있는 함수 관련 타입을 사용하고 있고, 제네릭으로 props를 전달하고 있기 때문에 굳이 함수의 파라미터에 중복해서 타입을 전달할 필요가 없음
 // 하지만 NextPage라는 기본 제공 타입을 연결하지 않는다면 파라미터에 타입 지정은 필수
 const Home: NextPage<Props> = (props) => {
+	const { InitialLoading } = getData();
 	return (
 		// w-screen: 100vw, h-screen: 100vh, w-full: 100%, h-full: 100%
 		<div className='relative w-full h-screen overflow-x-hidden scrollbar-thin scrollbar-thumb-[red] scrollbar-track-[transparent]'>
@@ -31,7 +33,8 @@ const Home: NextPage<Props> = (props) => {
 
 			<Header />
 			<main className='relative'>
-				<Banner original={props.original} />
+				{/* 로그인전에는 굳이 Banner 컴포넌트 자체를 마운트하지 않음(배너 내부의 큰 이미지 lcp 막기 위함) */}
+				{!InitialLoading.current && <Banner original={props.original} />}
 				{/* <List movies={props.sf} title={'Science Fiction'} />
 				<List movies={props.drama} title={'Drama'} /> */}
 				{Object.values(props).map((category, idx) => (

@@ -18,10 +18,9 @@ interface Props {
 	action: Movie[];
 }
 
-// 기존 Next Page 컴포넌트에 적용할 타입을 Next에 자체 제공되고 있는 NextPage을 가져와서 페이지 타입 지정
-// 해당 pageType을 우리가 만든것이 아니기 때문에 해당페이지에 전달되는 props의 type을 제네릭으로 지정
-
-const Home: NextPage<Props> = (props: Props) => {
+// Page 컴포넌트에 대한 타입은 Next에서 이미 제공하고 있는 함수 관련 타입을 사용하고 있고, 제네릭으로 props를 전달하고 있기 때문에 굳이 함수의 파라미터에 중복해서 타입을 전달할 필요가 없음
+// 하지만 NextPage라는 기본 제공 타입을 연결하지 않는다면 파라미터에 타입 지정은 필수
+const Home: NextPage<Props> = (props) => {
 	return (
 		// w-screen: 100vw, h-screen: 100vh, w-full: 100%, h-full: 100%
 		<div className='relative w-full h-screen overflow-x-hidden scrollbar-thin scrollbar-thumb-[red] scrollbar-track-[transparent]'>

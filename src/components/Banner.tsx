@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { Movie } from '../../types';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, FunctionComponent } from 'react';
 import { baseURL } from '@/url';
 import type { NextPage } from 'next';
 import { FaPlay, FaInfoCircle } from 'react-icons/fa';
@@ -10,7 +10,7 @@ interface Props {
 }
 
 // index.tsx 제외한 compoents안쪽의 파일들은 page 컴포넌트가 아니기 때문에 NextPage type제거
-const Banner = ({ original }: Props) => {
+const Banner: FunctionComponent<Props> = ({ original }) => {
 	// useState는 초기값을 집어넣지 않더라도 추후 담기는 값을 인지해서 타입 추론
 	// useState는 예외사항에 대한 값을 무조건 유니온타입으로 지정해야함
 	const [Movie, setMovie] = useState<Movie | null>(null);

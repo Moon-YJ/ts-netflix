@@ -3,8 +3,9 @@ import logo from '@/public/logo.svg';
 import profile from '@/public/profile.png';
 import { FaBell, FaSearch } from 'react-icons/fa';
 import Link from 'next/link';
+import { FunctionComponent } from 'react';
 
-const Header = () => {
+const Header: FunctionComponent = () => {
 	return (
 		<header className='w-full'>
 			<div className='flex items-center space-x-2 md:space-x-10 '>

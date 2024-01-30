@@ -1,7 +1,7 @@
 import { Movie } from '../../types';
 import Image from 'next/image';
 import { baseURL } from '@/url';
-import { useRef } from 'react';
+import { FunctionComponent, useRef } from 'react';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 
 interface Props {
@@ -14,7 +14,7 @@ interface ScrollProps {
 	clientWidth: number | null;
 }
 
-const List = ({ movies, title }: Props) => {
+const List: FunctionComponent<Props> = ({ movies, title }) => {
 	// listFrame에는 UL요소가 담기도록 type지정
 	const listFrame = useRef<HTMLUListElement>(null);
 	const handleClick = (direction: string) => {

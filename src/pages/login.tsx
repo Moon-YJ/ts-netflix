@@ -3,13 +3,29 @@ import Head from 'next/head';
 import Image from 'next/image';
 import { FunctionComponent, useState } from 'react';
 import logo from '@/public/logo.svg';
-import firebase from '@/firebase';
-console.log(firebase);
 import { MoonLoader } from 'react-spinners';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { Input } from 'postcss';
 // npm i react-spinners
+// npm i react-hook-form
+
+interface Inputs {
+	email: string;
+	password: string;
+}
 
 const Login: FunctionComponent = () => {
-	const [IsLoading, setIsLoading] = useState(true);
+	const [IsLoading, setIsLoading] = useState<boolean>(true);
+	const [Login, setLogin] = useState<boolean>(false);
+
+	// register: 원하는 input요소를 전개연산자로 등록해서 값을 관리
+	// handleSubmit: submit이벤트 발생시 register에 등록된 input값들의 인증처리 함수
+	// formState: 인증실패시 커스텀 에러메시지를 등록할 수 있는 객체
+	const {
+		register,
+		handleSubmit,
+		formState: { errors }, // formState객체값에서 다시 errors 프로퍼티에 등록되어있는 에러메시지만 추출
+	} = useForm<Inputs>();
 
 	return (
 		<>

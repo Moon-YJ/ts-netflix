@@ -3,7 +3,7 @@ import { Movie } from '../../types';
 import { useState, useEffect, useRef, FunctionComponent } from 'react';
 import { baseURL } from '@/url';
 import { FaPlay, FaInfoCircle } from 'react-icons/fa';
-import { modalState } from '@/recoil/globalAtom';
+import { modalState, movieState } from '@/recoil/globalAtom';
 import { useRecoilState } from 'recoil';
 
 interface Props {
@@ -19,6 +19,7 @@ const Banner: FunctionComponent<Props> = ({ original }) => {
 	// useState와 다르게 useRef는 unionType을 지정하지 않더라도 인수로 지정한 초기값을 자동으로 유니온타입 설정
 	const loading = useRef<any>(null);
 	const [ShowModal, setShowModal] = useRecoilState(modalState);
+	const [MovieInfo, setMovieInfo] = useRecoilState(movieState);
 	//console.log(Movie);
 
 	useEffect(() => {
@@ -65,7 +66,10 @@ const Banner: FunctionComponent<Props> = ({ original }) => {
 					<nav className='relative z-[3] flex gap-3'>
 						<button
 							className='bannerButton bg-[red]'
-							onClick={() => setShowModal(true)}
+							onClick={() => {
+								setShowModal(true);
+								setMovieInfo(Movie);
+							}}
 						>
 							<FaPlay />
 							Play

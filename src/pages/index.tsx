@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import type { NextPage } from 'next';
-import Header from '@/components/Header';
 import requests from '@/utils/request';
 import { Movie } from '../../types';
 import Banner from '@/components/Banner';
@@ -29,7 +28,6 @@ const Home: NextPage<Props> = (props) => {
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 
-			<Header />
 			<main className='relative'>
 				<Banner original={props.original} />
 				{/* <List movies={props.sf} title={'Science Fiction'} />

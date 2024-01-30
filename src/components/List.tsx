@@ -34,7 +34,7 @@ const List: FunctionComponent<Props> = ({ movies, title }) => {
 
 	return (
 		// 부모에 group지정시 자식요소에서 group-hover: 호버되는 영역을 지정 가능
-		<article className='relative z-[5] pl-4  group'>
+		<article className='relative z-[5] pl-4 group'>
 			<h2 className='mb-2 text-lg md:text-xl lg:text-2xl'>{title}</h2>
 			<ul
 				ref={listFrame}
@@ -44,7 +44,7 @@ const List: FunctionComponent<Props> = ({ movies, title }) => {
 					return (
 						<li
 							key={movie.id}
-							className='min-w-[180px] min-h-[80px] relative cursor-pointer md:min-w-[200px] md:min-h-[100px] lg:min-w-[240px] lg:min-h-[120px] opacity-50 hover:opacity-100 '
+							className='min-w-[180px] min-h-[80px] relative cursor-pointer md:min-w-[200px] md:min-h-[100px] lg:min-w-[240px] lg:min-h-[120px] opacity-50 hover:opacity-100'
 						>
 							<Image
 								src={`${baseURL}w300${movie.backdrop_path}`}
@@ -57,11 +57,11 @@ const List: FunctionComponent<Props> = ({ movies, title }) => {
 				})}
 			</ul>
 			<FaAngleLeft
-				className='absolute top-0 bottom-0 left-2 z-[5] m-auto h-12 cursor-pointer'
+				className='absolute top-0 bottom-0 left-2 z-[5] m-auto h-12 cursor-pointer opacity-0 transition-opacity duration-500 group-hover:opacity-100'
 				onClick={() => handleClick('left')}
 			/>
 			<FaAngleRight
-				className='absolute top-0 bottom-0 right-2 z-[5] m-auto h-12 cursor-pointer '
+				className='absolute top-0 bottom-0 right-2 z-[5] m-auto h-12 cursor-pointer opacity-0 transition-opacity duration-500 group-hover:opacity-100'
 				onClick={() => handleClick('right')}
 			/>
 		</article>

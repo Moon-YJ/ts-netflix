@@ -5,6 +5,7 @@ import { FunctionComponent, useState } from 'react';
 import logo from '@/public/logo.svg';
 import { MoonLoader } from 'react-spinners';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import getData from '@/hooks/useAuth';
 // npm i react-spinners
 // npm i react-hook-form
 
@@ -14,8 +15,11 @@ interface Inputs {
 }
 
 const Login: FunctionComponent = () => {
+	const { signIn, signUp } = getData();
+	console.log(signIn);
 	const [IsLoading, setIsLoading] = useState<boolean>(true);
 	const [Login, setLogin] = useState<boolean>(false);
+	const [LoginVal, setLoginVal] = useState({ email: '', password: '' });
 
 	// register: 원하는 input요소를 전개연산자로 등록해서 값을 관리
 	// handleSubmit: submit이벤트 발생시 register에 등록된 input값들의 인증처리 핸들러함수를 콜백으로 전달받음
@@ -30,6 +34,13 @@ const Login: FunctionComponent = () => {
 	const join: SubmitHandler<Inputs> = async ({ email, password }) => {
 		console.log('email: ', email);
 		console.log('password: ', password);
+		if (Login) {
+			// Login값이 true이면 로그인 함수 호출
+			await signIn(email, password);
+		} else {
+			// Login값이 false이면 회원가입 함수 호출
+			await signUp(email, password);
+		}
 	};
 
 	return (
@@ -89,12 +100,20 @@ const Login: FunctionComponent = () => {
 						/>
 						{errors.password && <span>Enter valid Password.</span>}
 					</div>
-					<button className='w-full rounded bg-[red] py-3 font-semibold'>
+					{/* SignIn 버튼 클릭시 Login값 true로변경 */}
+					<button
+						className='w-full rounded bg-[red] py-3 font-semibold'
+						onClick={() => setLogin(true)}
+					>
 						Sign In
 					</button>
 					<div className='text-[gray]'>
 						New to Nextflix?
-						<button className='ml-4 text-white hover:underline'>
+						{/* Sign Up 버튼 클릭시 Login값 false로 변경 */}
+						<button
+							className='ml-4 text-white hover:underline'
+							onClick={() => setLogin(false)}
+						>
 							Sign Up Now
 						</button>
 					</div>

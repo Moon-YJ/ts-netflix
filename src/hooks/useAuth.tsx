@@ -16,17 +16,13 @@ import React, {
 } from 'react';
 import { auth } from '@/firebase';
 
-interface Iloading {
-	current: boolean;
-}
-
 // 전역 Context에 전달할 인증정보 타입
 interface IAuth {
 	UserInfo: User | null;
 	signIn: (email: string, password: string) => Promise<void>; // promise 반환 공식
 	signUp: (email: string, password: string) => Promise<void>;
 	logout: () => Promise<void>;
-	InitialLoading: Iloading;
+	InitialLoading: { current: boolean };
 }
 
 // 전역State provider에 전달할 Props 타입
@@ -50,6 +46,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 	const InitialLoading = useRef<boolean>(true);
 	const router = useRouter();
 
+	// 의존성 배열에서 router제거 (그렇지 않으면 무한로딩 오류)
 	useEffect(() => {
 		// firebase로부터 전달되는 Auth 상태값이 변경될때마다 해당 useEffect 실행
 		onAuthStateChanged(auth, (user) => {
@@ -65,7 +62,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 			// 한번이라도 인증로직이 실행되면 초기상태를 false로 변경
 			setTimeout(() => (InitialLoading.current = false), 0);
 		});
-	}, [router]);
+	}, []);
 
 	// 회원가입 함수
 	const signUp = async (email: string, password: string) => {
@@ -97,7 +94,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 	};
 
 	// 새로고침시 같은 로그인 정보값이면 해당 값을 다시 연산하지 않도록 메모이제이션처리해서 전역 context에 넘기고
-	const memoedContext = useMemo(
+	const memoedContext: IAuth = useMemo(
 		() => ({ UserInfo, signIn, signUp, logout, InitialLoading }),
 		[UserInfo]
 	);

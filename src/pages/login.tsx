@@ -26,9 +26,10 @@ const Login: FunctionComponent = () => {
 		formState: { errors }, // formState객체값에서 다시 errors 프로퍼티에 등록되어있는 에러메시지만 추출
 	} = useForm<Inputs>();
 
+	// 인증 성공시 handleSubmit에 의해서 자동으로 실행될 콜백함수
 	const join: SubmitHandler<Inputs> = async ({ email, password }) => {
-		console.log(email, '::email');
-		console.log(password, '::pwd');
+		console.log('email: ', email);
+		console.log('password: ', password);
 	};
 
 	return (
@@ -66,7 +67,12 @@ const Login: FunctionComponent = () => {
 							type='email'
 							placeholder='Email'
 							className='input'
-							{...register('email', { required: true })}
+							{...register('email', {
+								required: true,
+								minLength: 5,
+								maxLength: 20,
+								pattern: /[@]/, // 정규표현식 @포함
+							})}
 						/>
 						{/* 인증 실패시 비구조할당으로 뽑아낸 errors 객체에 전달한 property명으로 에러값 전달 */}
 						{errors.email && <span>Enter valid Email address.</span>}
@@ -74,7 +80,12 @@ const Login: FunctionComponent = () => {
 							type='password'
 							placeholder='Password'
 							className='input'
-							{...register('password', { required: true })}
+							{...register('password', {
+								required: true,
+								minLength: 4,
+								maxLength: 10,
+								pattern: /[a-zA-Z]+[0-9]+[!@#$%^&*()_+]+/, // 영문 대소문자+숫자+특수문자 순서대로
+							})}
 						/>
 						{errors.password && <span>Enter valid Password.</span>}
 					</div>

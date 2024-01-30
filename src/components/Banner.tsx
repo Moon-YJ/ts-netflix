@@ -2,7 +2,6 @@ import Image from 'next/image';
 import { Movie } from '../../types';
 import { useState, useEffect, useRef, FunctionComponent } from 'react';
 import { baseURL } from '@/url';
-import type { NextPage } from 'next';
 import { FaPlay, FaInfoCircle } from 'react-icons/fa';
 
 interface Props {

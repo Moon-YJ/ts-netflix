@@ -6,6 +6,9 @@ import { Movie } from '../../types';
 import Banner from '@/components/Banner';
 import List from '@/components/List';
 import getData from '@/hooks/useAuth';
+import Modal from '@/components/Modal';
+import { useRecoilValue } from 'recoil';
+import { modalState } from '@/recoil/globalAtom';
 // npm i tailwind-scrollbar tailwind-scrollbar-hide
 // 확장기능 headwind: tailwind구문에서 최적화된 순서에 맞게 구문 자동재배치 (ctrl+alt+T)
 
@@ -23,6 +26,8 @@ interface Props {
 // 하지만 NextPage라는 기본 제공 타입을 연결하지 않는다면 파라미터에 타입 지정은 필수
 const Home: NextPage<Props> = (props) => {
 	const { InitialLoading } = getData();
+	const showModal = useRecoilValue(modalState);
+
 	return (
 		// w-screen: 100vw, h-screen: 100vh, w-full: 100%, h-full: 100%
 		<div className='relative w-full h-screen overflow-x-hidden scrollbar-thin scrollbar-thumb-[red] scrollbar-track-[transparent]'>
@@ -41,6 +46,7 @@ const Home: NextPage<Props> = (props) => {
 					<List key={idx} movies={category} title={Object.keys(props)[idx]} />
 				))}
 			</main>
+			{showModal && <Modal />}
 		</div>
 	);
 };

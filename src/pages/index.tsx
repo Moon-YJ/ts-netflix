@@ -39,7 +39,9 @@ const Home: NextPage<Props> = (props) => {
 			<Header />
 			<main className='relative'>
 				{/* 로그인전에는 굳이 Banner 컴포넌트 자체를 마운트하지 않음(배너 내부의 큰 이미지 lcp 막기 위함) */}
-				{!InitialLoading.current && <Banner original={props.original} />}
+				<figure className='relative w-full h-[60vh] md:h-[70vh] lg:h-[85vh]'>
+					{!InitialLoading.current && <Banner original={props.original} />}
+				</figure>
 				{/* <List movies={props.sf} title={'Science Fiction'} />
 				<List movies={props.drama} title={'Drama'} /> */}
 				{Object.values(props).map((category, idx) => (

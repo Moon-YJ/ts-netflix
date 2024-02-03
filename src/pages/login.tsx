@@ -64,7 +64,8 @@ const Login: FunctionComponent = () => {
 					size={50}
 					color='#36d7b7'
 					loading={IsLoading}
-					className='absolute top-[50%] left-[50%] ml-[-25px] mt-[-25px] z-[2]'
+					className='top-[50%] left-[50%] ml-[-25px] mt-[-25px] z-[2]'
+					cssOverride={{ position: 'absolute' }}
 				/>
 				{/* login */}
 				{/* submit 이벤트 발생시 handleSubmit이 인증처리를 해주고, 등록된 콜백함수에 인증 결과값을 전달 */}

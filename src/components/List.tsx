@@ -34,7 +34,7 @@ const List: FunctionComponent<Props> = ({ movies, title }) => {
 
 	return (
 		// 부모에 group지정시 자식요소에서 group-hover: 호버되는 영역을 지정 가능
-		<article className='relative z-[5] pl-4 group'>
+		<article className='relative z-[5] pl-7 group'>
 			<h2 className='mb-2 text-lg md:text-xl lg:text-2xl'>{title}</h2>
 			<ul
 				ref={listFrame}

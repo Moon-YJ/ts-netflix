@@ -29,7 +29,7 @@ const Banner: FunctionComponent<Props> = ({ original }) => {
 	}, [original]);
 
 	return (
-		<section className='relative flex flex-col h-[60vh] justify-end px-4 pt-40 pb-5 space-y-4 md:h-[70vh] md:pd-15 md:space-y-8 lg:space-y-14 lg:h-[85vh] lg:pb-20'>
+		<section className='relative flex flex-col h-[60vh] justify-end px-8 pb-[10vh] gap-8 md:h-[70vh] md:gap-12 md:px-10 lg:gap-16 lg:h-[85vh] lg:px-14 '>
 			{Movie && (
 				<>
 					{/* pic Frame */}
@@ -48,7 +48,7 @@ const Banner: FunctionComponent<Props> = ({ original }) => {
 						/>
 					</div>
 					{/* gradient layer */}
-					<div className='absolute top-0 left-0 w-full h-full z-[2] bg-gradient1'></div>
+					<div className='absolute top-0 left-0 w-full h-full mt-0 z-[2] bg-gradient1'></div>
 					{/* loading bar */}
 					<div
 						ref={loading}

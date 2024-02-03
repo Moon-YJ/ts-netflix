@@ -8,7 +8,7 @@
 		@apply bg-[#141414] text-white;
 	}
 	header {
-		@apply fixed top-0 z-50 flex items-center justify-between px-4 py-4;
+		@apply fixed top-0 z-50 flex items-center justify-between px-10 py-8;
 	}
 }
 

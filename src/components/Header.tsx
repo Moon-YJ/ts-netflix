@@ -3,14 +3,26 @@ import logo from '@/public/logo.svg';
 import profile from '@/public/profile.png';
 import { FaBell, FaSearch } from 'react-icons/fa';
 import Link from 'next/link';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useEffect, useState } from 'react';
 import getData from '@/hooks/useAuth';
 
 const Header: FunctionComponent = () => {
 	const { logout } = getData();
+	const [Scrolled, setScrolled] = useState<boolean>(false);
+
+	useEffect(() => {
+		const handleScroll = () =>
+			window.scrollY > 0 ? setScrolled(true) : setScrolled(false);
+		window.addEventListener('scroll', handleScroll);
+		return () => window.removeEventListener('scroll', handleScroll);
+	}, []);
 
 	return (
-		<header className='w-full'>
+		<header
+			className={`w-full transition duration-[1s] ${
+				Scrolled ? 'bg-[#141414]' : 'bg-transparent'
+			}`}
+		>
 			<div className='flex items-center space-x-2 md:space-x-10 '>
 				<h1>
 					<Image

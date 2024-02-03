@@ -30,7 +30,7 @@ const Home: NextPage<Props> = (props) => {
 
 	return (
 		// w-screen: 100vw, h-screen: 100vh, w-full: 100%, h-full: 100%
-		<div className='relative w-full h-screen overflow-x-hidden scrollbar-thin scrollbar-thumb-[red] scrollbar-track-[transparent]'>
+		<div className='relative w-full'>
 			<Head>
 				<title>NETFLIX</title>
 				<link rel='icon' href='/favicon.ico' />

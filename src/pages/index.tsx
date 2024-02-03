@@ -36,17 +36,26 @@ const Home: NextPage<Props> = (props) => {
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 
-			<Header />
 			<main className='relative'>
-				{/* 로그인전에는 굳이 Banner 컴포넌트 자체를 마운트하지 않음(배너 내부의 큰 이미지 lcp 막기 위함) */}
-				<figure className='relative w-full h-[60vh] md:h-[70vh] lg:h-[85vh]'>
-					{!InitialLoading.current && <Banner original={props.original} />}
-				</figure>
-				{/* <List movies={props.sf} title={'Science Fiction'} />
-				<List movies={props.drama} title={'Drama'} /> */}
-				{Object.values(props).map((category, idx) => (
-					<List key={idx} movies={category} title={Object.keys(props)[idx]} />
-				))}
+				{/* 로그인 안된 상태에서 처음 접속시 메인화면 잠깐 보였다가 로그인 페이지로 넘어가는 이슈 해결 */}
+				{!InitialLoading.current && (
+					<>
+						<Header />
+						{/* 로그인전에는 굳이 Banner 컴포넌트 자체를 마운트하지 않음(배너 내부의 큰 이미지 lcp 막기 위함) */}
+						<figure className='relative w-full h-[60vh] md:h-[70vh] lg:h-[85vh]'>
+							<Banner original={props.original} />
+						</figure>
+						{/* <List movies={props.sf} title={'Science Fiction'} />
+						<List movies={props.drama} title={'Drama'} /> */}
+						{Object.values(props).map((category, idx) => (
+							<List
+								key={idx}
+								movies={category}
+								title={Object.keys(props)[idx]}
+							/>
+						))}
+					</>
+				)}
 			</main>
 			{showModal && <Modal />}
 		</div>

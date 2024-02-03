@@ -1,8 +1,11 @@
 import { Movie } from '../../types';
 import Image from 'next/image';
 import { baseURL } from '@/url';
-import { FunctionComponent, useRef } from 'react';
+import { FunctionComponent, useRef, useState } from 'react';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
+import { useRecoilState } from 'recoil';
+import { modalState, movieState } from '@/recoil/globalAtom';
+import { BounceLoader } from 'react-spinners';
 
 interface Props {
 	title: string;
@@ -15,6 +18,9 @@ interface ScrollProps {
 }
 
 const List: FunctionComponent<Props> = ({ movies, title }) => {
+	const [Loaded, setLoaded] = useState<boolean>(false);
+	const [ShowModal, setShowModal] = useRecoilState(modalState);
+	const [MovieInfo, setMovieInfo] = useRecoilState(movieState);
 	// listFrame에는 UL요소가 담기도록 type지정
 	const listFrame = useRef<HTMLUListElement>(null);
 	const handleClick = (direction: string) => {
@@ -44,13 +50,28 @@ const List: FunctionComponent<Props> = ({ movies, title }) => {
 					return (
 						<li
 							key={movie.id}
-							className='min-w-[180px] min-h-[80px] relative cursor-pointer md:min-w-[200px] md:min-h-[100px] lg:min-w-[240px] lg:min-h-[120px] opacity-50 hover:opacity-100'
+							className='min-w-[180px] min-h-[80px] relative cursor-pointer md:min-w-[200px] md:min-h-[100px] lg:min-w-[240px] lg:min-h-[120px] opacity-50 hover:opacity-100 '
+							onClick={() => {
+								setShowModal(true);
+								setMovieInfo(movie);
+							}}
 						>
 							<Image
 								src={`${baseURL}w300${movie.backdrop_path}`}
 								alt={`${movie.title || movie.name}`}
 								fill
 								className='object-cover'
+								onLoadingComplete={() => setLoaded(true)}
+							/>
+							<BounceLoader
+								color={'orange'}
+								cssOverride={{
+									position: 'absolute',
+									top: '50%',
+									left: '50%',
+									transform: 'translate(-50%, -50%)',
+								}}
+								loading={!Loaded}
 							/>
 						</li>
 					);

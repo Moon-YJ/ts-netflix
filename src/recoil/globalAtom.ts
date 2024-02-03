@@ -3,11 +3,11 @@ import { atom } from 'recoil';
 import { Movie } from '../../types';
 
 export const modalState = atom<boolean>({
-	key: 'modalState',
+	key: 'modalStateKey',
 	default: false,
 });
 
 export const movieState = atom<Movie | null>({
-	key: 'movieState',
+	key: 'movieStateKey',
 	default: null,
 });
